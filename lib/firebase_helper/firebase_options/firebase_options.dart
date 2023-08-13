@@ -16,10 +16,10 @@ class DefaultFirebaseConfig {
     } else {
       // Android
       return const FirebaseOptions(
-        appId: '',
-        apiKey: '',
-        projectId: '',
-        messagingSenderId: '',
+        apiKey: 'AIzaSyARaVohBmwQnuGmxTTUn5PpmE8TWOiw2aY',
+        appId: '1:1036429344343:android:fd603aca5d214ecf262d12',
+        messagingSenderId: '1036429344343',
+        projectId: 'grid-a561d',
       );
     }
   }
