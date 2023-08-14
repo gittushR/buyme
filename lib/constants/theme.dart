@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData themeData = ThemeData(
   scaffoldBackgroundColor: Colors.white,
@@ -25,7 +26,7 @@ ThemeData themeData = ThemeData(
     ),
   ),
   primaryColor: Colors.red,
-  fontFamily: 'Lato',
+  fontFamily: GoogleFonts.poppins().fontFamily,
 );
 
 OutlineInputBorder outlineInputBorder = const OutlineInputBorder(

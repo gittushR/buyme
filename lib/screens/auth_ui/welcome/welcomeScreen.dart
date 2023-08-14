@@ -19,6 +19,9 @@ class WelcomeScreen extends StatelessWidget {
             const TopTitles(
                 title: "Welcome",
                 subTitle: "Get your personalized recommendations "),
+            const SizedBox(
+              height: 25,
+            ),
             Center(
               child: Image.asset(
                 AssetsImages.instance.welcomeImage,

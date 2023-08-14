@@ -30,7 +30,6 @@ class TopTitles extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        const SizedBox(height: 25),
       ],
     );
   }

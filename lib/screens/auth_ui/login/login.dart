@@ -78,6 +78,7 @@ class _LoginState extends State<Login> {
                     bool isLoggedIn = await FirebaseAuthHelper.instance
                         .login(email.text, password.text, context);
                     if (isLoggedIn) {
+                      // ignore: use_build_context_synchronously
                       Routes.instance
                           .pushAndRemoveUntil(const HomeScreen(), context);
                     }

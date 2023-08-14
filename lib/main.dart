@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flipkart_grid_5/constants/theme.dart';
 import 'package:flipkart_grid_5/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:flipkart_grid_5/screens/auth_ui/login/login.dart';
+import 'package:flipkart_grid_5/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:flipkart_grid_5/screens/auth_ui/welcome/welcomeScreen.dart';
 import 'package:flipkart_grid_5/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
