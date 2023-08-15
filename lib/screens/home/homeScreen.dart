@@ -1,4 +1,6 @@
+import 'package:flipkart_grid_5/constants/routes.dart';
 import 'package:flipkart_grid_5/models/product_model.dart';
+import 'package:flipkart_grid_5/screens/product_details.dart';
 import 'package:flipkart_grid_5/widgets/top_tiltle.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisCount: 2,
                   childAspectRatio: 0.88,
                 ),
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 shrinkWrap: true,
                 children: [
                   for (final singleProduct in recommendedProducts)
@@ -121,7 +123,11 @@ class HomeScreen extends StatelessWidget {
                             height: 45,
                             width: 200,
                             child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Routes.instance.push(
+                                    ProductDetails(product: singleProduct),
+                                    context);
+                              },
                               style: OutlinedButton.styleFrom(
                                 foregroundColor:
                                     Theme.of(context).colorScheme.primary,

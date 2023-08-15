@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,8 +26,22 @@ ThemeData themeData = ThemeData(
       ),
     ),
   ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      foregroundColor: Colors.red,
+      side: const BorderSide(color: Colors.red, width: 1.7),
+      disabledForegroundColor: Colors.red.withOpacity(0.38),
+    ),
+  ),
+  primarySwatch: Colors.red,
   primaryColor: Colors.red,
   fontFamily: GoogleFonts.poppins().fontFamily,
+  appBarTheme: const AppBarTheme(
+    foregroundColor: Colors.black,
+    backgroundColor: Colors.white,
+    iconTheme: IconThemeData(color: Colors.black),
+    elevation: 0.0,
+  ),
 );
 
 OutlineInputBorder outlineInputBorder = const OutlineInputBorder(

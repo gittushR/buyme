@@ -10,7 +10,7 @@ class TopTitles extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: kToolbarHeight + 12),
+        const SizedBox(height: kToolbarHeight),
         if (title == 'Login' || title == 'Create Account')
           IconButton(
             onPressed: () {
