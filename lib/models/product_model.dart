@@ -14,7 +14,7 @@ class ProductModel {
       required this.description,
       required this.isFavourite,
       required this.status,
-      this.qty});
+      required this.qty});
 
   String image;
   String id;
@@ -23,8 +23,7 @@ class ProductModel {
   double price;
   String description;
   String status;
-
-  int? qty;
+  int qty;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],

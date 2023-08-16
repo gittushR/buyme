@@ -1,19 +1,23 @@
 import 'package:flipkart_grid_5/constants/routes.dart';
 import 'package:flipkart_grid_5/models/product_model.dart';
+import 'package:flipkart_grid_5/providers/cart_provider.dart';
+import 'package:flipkart_grid_5/providers/wishlist_provider.dart';
 import 'package:flipkart_grid_5/screens/cart_screen.dart';
+import 'package:flipkart_grid_5/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetails extends ConsumerStatefulWidget {
   const ProductDetails({super.key, required this.product});
   final ProductModel product;
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
+  ConsumerState<ProductDetails> createState() => _ProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _ProductDetailsState extends ConsumerState<ProductDetails> {
   int qty = 1;
   @override
   Widget build(BuildContext context) {
@@ -53,14 +57,34 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   IconButton(
                     onPressed: () {
+                      final wasAdded = ref
+                          .read(favProvider.notifier)
+                          .toggleProFavStatus(widget.product);
                       setState(() {
-                        widget.product.isFavourite =
-                            !widget.product.isFavourite;
+                        widget.product.isFavourite = wasAdded;
                       });
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(wasAdded
+                            ? "Added to Favorites"
+                            : "Removed from Favorites"),
+                        duration: const Duration(seconds: 5),
+                      ));
+                      // print(widget.product.isFavourite);
                     },
-                    icon: Icon(widget.product.isFavourite
-                        ? Icons.favorite_outline
-                        : Icons.favorite),
+                    icon: AnimatedSwitcher(
+                      transitionBuilder: (child, animation) => FadeTransition(
+                        opacity: Tween<double>(
+                          begin: 0.5,
+                          end: 1,
+                        ).animate(animation),
+                        child: child,
+                      ),
+                      duration: const Duration(milliseconds: 300),
+                      child: Icon(widget.product.isFavourite
+                          ? Icons.favorite
+                          : Icons.favorite_outline),
+                    ),
                   )
                 ],
               ),
@@ -68,54 +92,65 @@ class _ProductDetailsState extends State<ProductDetails> {
               const SizedBox(
                 height: 12,
               ),
-              Row(
-                children: [
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      if (qty > 0) {
-                        setState(() {
-                          qty--;
-                        });
-                      }
-                    },
-                    icon: const CircleAvatar(
-                      child: Icon(Icons.remove_circle),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    qty.toString(),
-                    style: const TextStyle(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      setState(() {
-                        qty++;
-                      });
-                    },
-                    icon: const CircleAvatar(
-                      child: Icon(Icons.add_circle),
-                    ),
-                  )
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     IconButton(
+              //       padding: EdgeInsets.zero,
+              //       onPressed: () {
+              //         if (qty > 0) {
+              //           setState(() {
+              //             qty--;
+              //           });
+              //         }
+              //       },
+              //       icon: const CircleAvatar(
+              //         child: Icon(Icons.remove_circle),
+              //       ),
+              //     ),
+              //     const SizedBox(
+              //       width: 12,
+              //     ),
+              //     Text(
+              //       qty.toString(),
+              //       style: const TextStyle(
+              //           fontSize: 22, fontWeight: FontWeight.bold),
+              //     ),
+              //     const SizedBox(
+              //       width: 12,
+              //     ),
+              //     IconButton(
+              //       padding: EdgeInsets.zero,
+              //       onPressed: () {
+              //         setState(() {
+              //           qty++;
+              //         });
+              //       },
+              //       icon: const CircleAvatar(
+              //         child: Icon(Icons.add_circle),
+              //       ),
+              //     )
+              //   ],
+              // ),
               const Spacer(),
+              // const Spacer(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
                     height: 50,
                     width: 150,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Added to cart"),
+                          ),
+                        );
+                        ref
+                            .read(cartProvider.notifier)
+                            .addToCart(widget.product);
+                      },
                       child: const Text("ADD TO CART"),
                     ),
                   ),
@@ -126,14 +161,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: 50,
                     width: 150,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Routes.instance.push(const WishlistScreen(), context);
+                      },
                       child: const Text("BUY"),
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: kFloatingActionButtonMargin,
+                height: kBottomNavigationBarHeight,
               )
             ],
           ),

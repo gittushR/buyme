@@ -6,6 +6,7 @@ import 'package:flipkart_grid_5/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:flipkart_grid_5/screens/auth_ui/welcome/welcomeScreen.dart';
 import 'package:flipkart_grid_5/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,7 @@ void main() async {
       projectId: 'grid-a561d',
     ),
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

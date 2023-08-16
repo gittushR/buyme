@@ -1,20 +1,24 @@
+import 'package:flipkart_grid_5/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CartItem extends StatefulWidget {
-  const CartItem({super.key});
+import '../providers/cart_provider.dart';
+
+class CartItem extends ConsumerStatefulWidget {
+  const CartItem({super.key, required this.product});
+  final ProductModel product;
 
   @override
-  State<CartItem> createState() => _CartItemState();
+  ConsumerState<CartItem> createState() => _CartItemState();
 }
 
-class _CartItemState extends State<CartItem> {
-  int qty = 0;
+class _CartItemState extends ConsumerState<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
@@ -28,8 +32,7 @@ class _CartItemState extends State<CartItem> {
           Expanded(
             child: Container(
               height: 155,
-              child: Image.network(
-                  "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png"),
+              child: Image.network(widget.product.image),
             ),
           ),
           Expanded(
@@ -45,9 +48,9 @@ class _CartItemState extends State<CartItem> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "  Product",
-                          style: TextStyle(
+                        Text(
+                          "  ${widget.product.name}",
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         TextButton(
@@ -63,10 +66,20 @@ class _CartItemState extends State<CartItem> {
                             IconButton(
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                if (qty > 0) {
+                                if (widget.product.qty > 1) {
                                   setState(() {
-                                    qty--;
+                                    widget.product.qty--;
                                   });
+                                } else if (widget.product.qty == 1) {
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              "Removed ${widget.product.name} from cart")));
+                                  ref
+                                      .read(cartProvider.notifier)
+                                      .removeFromCart(widget.product);
                                 }
                               },
                               icon: const CircleAvatar(
@@ -75,7 +88,7 @@ class _CartItemState extends State<CartItem> {
                               ),
                             ),
                             Text(
-                              qty.toString(),
+                              widget.product.qty.toString(),
                               style: const TextStyle(
                                   fontSize: 22, fontWeight: FontWeight.bold),
                             ),
@@ -83,7 +96,7 @@ class _CartItemState extends State<CartItem> {
                               padding: EdgeInsets.zero,
                               onPressed: () {
                                 setState(() {
-                                  qty++;
+                                  widget.product.qty++;
                                 });
                               },
                               icon: const CircleAvatar(
@@ -95,10 +108,10 @@ class _CartItemState extends State<CartItem> {
                         ),
                       ],
                     ),
-                    const Text(
-                      "\$233",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      "\$${widget.product.price}",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

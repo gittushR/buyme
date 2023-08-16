@@ -1,31 +1,59 @@
+import 'package:flipkart_grid_5/constants/asset_images.dart';
+import 'package:flipkart_grid_5/providers/cart_provider.dart';
 import 'package:flipkart_grid_5/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  ConsumerState<CartScreen> createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
-  int qty = 0;
+class _CartScreenState extends ConsumerState<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Cart"),
-      ),
-      body: ListView.builder(
-        itemCount: 10,
-        padding: const EdgeInsets.all(12),
-        itemBuilder: (ctx, ind) {
-          return const CartItem();
-        },
-      ),
-    );
+    var cart = ref.watch(cartProvider);
+    if (cart.isEmpty) {
+      return Scaffold(
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                AssetsImages.instance.emptyCart,
+                scale: 5,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Cart is empty!!! \nStart Adding your favorite products to cart",
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Cart"),
+        ),
+        body: ListView.builder(
+          itemCount: cart.length,
+          padding: const EdgeInsets.all(12),
+          itemBuilder: (ctx, ind) {
+            return CartItem(
+              product: cart[ind],
+            );
+          },
+        ),
+      );
+    }
   }
 }
 

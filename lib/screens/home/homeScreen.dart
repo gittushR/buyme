@@ -3,6 +3,7 @@ import 'package:flipkart_grid_5/models/product_model.dart';
 import 'package:flipkart_grid_5/screens/product_details.dart';
 import 'package:flipkart_grid_5/widgets/top_tiltle.dart';
 import 'package:flutter/material.dart';
+import 'package:flipkart_grid_5/data/dummy_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -158,107 +159,4 @@ List<String> categoriesList = [
   "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
   "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
   "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-];
-
-List<ProductModel> recommendedProducts = [
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '1',
-    name: "Item1",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '2',
-    name: "Item2",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '3',
-    name: "Item3",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '4',
-    name: "Item4",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '5',
-    name: "Item5",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
-    name: "Item6",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
-    name: "Item6",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
-    name: "Item6",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
-    name: "Item6",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
-  ProductModel(
-    image:
-        "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
-    name: "Item6",
-    price: 1,
-    description: "Dummy Text. this is a recommended product",
-    isFavourite: false,
-    status: 'pending',
-  ),
 ];
