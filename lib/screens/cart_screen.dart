@@ -52,6 +52,9 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             );
           },
         ),
+        bottomNavigationBar: const SizedBox(
+          height: kBottomNavigationBarHeight,
+        ),
       );
     }
   }

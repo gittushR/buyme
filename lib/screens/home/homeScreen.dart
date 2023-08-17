@@ -145,7 +145,10 @@ class HomeScreen extends StatelessWidget {
                     )
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: kBottomNavigationBarHeight + 10,
+            ),
           ],
         ),
       ),

@@ -44,6 +44,8 @@ dependencies:
   riverpod: ^2.3.6
   flutter_riverpod: ^2.3.6
   transparent_image: ^2.0.1
+  uuid: ^3.0.7
+  persistent_bottom_nav_bar: ^5.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flipkart_grid_5/models/product_model.dart';
+import 'package:flipkart_grid_5/providers/wishlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -40,7 +41,7 @@ class _CartItemState extends ConsumerState<CartItem> {
             child: Container(
               height: 155,
               child: Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +55,14 @@ class _CartItemState extends ConsumerState<CartItem> {
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ref
+                                .read(cartProvider.notifier)
+                                .removeFromCart(widget.product);
+                            ref
+                                .read(favProvider.notifier)
+                                .addToWishList(widget.product);
+                          },
                           child: const Text(
                             "Add to Wishlist",
                             style: TextStyle(
@@ -109,7 +117,7 @@ class _CartItemState extends ConsumerState<CartItem> {
                       ],
                     ),
                     Text(
-                      "\$${widget.product.price}",
+                      "\$${widget.product.qty * widget.product.price}",
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),

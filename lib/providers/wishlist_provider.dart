@@ -3,6 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FavNotifier extends StateNotifier<List<ProductModel>> {
   FavNotifier() : super([]);
+  void addToWishList(ProductModel product) {
+    state = [...state, product];
+  }
+
+  void removeFromWishList(ProductModel product) {
+    state = state.where((m) => m.id != product.id).toList();
+  }
+
   bool toggleProFavStatus(ProductModel product) {
     var isProFav = state.contains(product);
     if (isProFav == true) {

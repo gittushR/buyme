@@ -4,6 +4,7 @@ import 'package:flipkart_grid_5/firebase_helper/firebase_auth_helper/firebase_au
 import 'package:flipkart_grid_5/screens/auth_ui/login/login.dart';
 import 'package:flipkart_grid_5/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:flipkart_grid_5/screens/auth_ui/welcome/welcomeScreen.dart';
+import 'package:flipkart_grid_5/screens/bottom_tab.dart';
 import 'package:flipkart_grid_5/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuthHelper.instance.getAuthChange,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomeScreen();
+            return const BottomTab();
           }
           return const WelcomeScreen();
         },

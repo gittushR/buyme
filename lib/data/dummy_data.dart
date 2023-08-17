@@ -70,7 +70,7 @@ List<ProductModel> recommendedProducts = [
   ProductModel(
     image:
         "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
+    id: '7',
     name: "Item6",
     price: 1,
     description: "Dummy Text. this is a recommended product",
@@ -81,7 +81,7 @@ List<ProductModel> recommendedProducts = [
   ProductModel(
     image:
         "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
-    id: '6',
+    id: '8',
     name: "Item6",
     price: 1,
     description: "Dummy Text. this is a recommended product",

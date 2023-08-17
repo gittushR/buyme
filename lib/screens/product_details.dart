@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = Uuid();
 
 class ProductDetails extends ConsumerStatefulWidget {
   const ProductDetails({super.key, required this.product});
@@ -21,6 +24,8 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
   int qty = 1;
   @override
   Widget build(BuildContext context) {
+    var favProduct = ref.watch(favProvider);
+    final isFav = favProduct.contains(widget.product);
     return SafeArea(
       bottom: true,
       top: false,
@@ -81,9 +86,8 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                         child: child,
                       ),
                       duration: const Duration(milliseconds: 300),
-                      child: Icon(widget.product.isFavourite
-                          ? Icons.favorite
-                          : Icons.favorite_outline),
+                      child:
+                          Icon(isFav ? Icons.favorite : Icons.favorite_outline),
                     ),
                   )
                 ],
@@ -92,45 +96,45 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
               const SizedBox(
                 height: 12,
               ),
-              // Row(
-              //   children: [
-              //     IconButton(
-              //       padding: EdgeInsets.zero,
-              //       onPressed: () {
-              //         if (qty > 0) {
-              //           setState(() {
-              //             qty--;
-              //           });
-              //         }
-              //       },
-              //       icon: const CircleAvatar(
-              //         child: Icon(Icons.remove_circle),
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       width: 12,
-              //     ),
-              //     Text(
-              //       qty.toString(),
-              //       style: const TextStyle(
-              //           fontSize: 22, fontWeight: FontWeight.bold),
-              //     ),
-              //     const SizedBox(
-              //       width: 12,
-              //     ),
-              //     IconButton(
-              //       padding: EdgeInsets.zero,
-              //       onPressed: () {
-              //         setState(() {
-              //           qty++;
-              //         });
-              //       },
-              //       icon: const CircleAvatar(
-              //         child: Icon(Icons.add_circle),
-              //       ),
-              //     )
-              //   ],
-              // ),
+              Row(
+                children: [
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      if (qty > 1) {
+                        setState(() {
+                          qty--;
+                        });
+                      }
+                    },
+                    icon: const CircleAvatar(
+                      child: Icon(Icons.remove_circle),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  Text(
+                    qty.toString(),
+                    style: const TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      setState(() {
+                        qty++;
+                      });
+                    },
+                    icon: const CircleAvatar(
+                      child: Icon(Icons.add_circle),
+                    ),
+                  )
+                ],
+              ),
               const Spacer(),
               // const Spacer(),
               Row(
@@ -147,9 +151,17 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                             content: Text("Added to cart"),
                           ),
                         );
-                        ref
-                            .read(cartProvider.notifier)
-                            .addToCart(widget.product);
+                        ref.read(cartProvider.notifier).addToCart(
+                              ProductModel(
+                                  image: widget.product.image,
+                                  id: uuid.v1(),
+                                  name: widget.product.name,
+                                  price: widget.product.price,
+                                  description: widget.product.description,
+                                  isFavourite: isFav,
+                                  status: widget.product.status,
+                                  qty: qty),
+                            );
                       },
                       child: const Text("ADD TO CART"),
                     ),
@@ -170,8 +182,8 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                 ],
               ),
               const SizedBox(
-                height: kBottomNavigationBarHeight,
-              )
+                height: kBottomNavigationBarHeight + 20,
+              ),
             ],
           ),
         ),

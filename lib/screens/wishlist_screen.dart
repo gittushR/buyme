@@ -38,6 +38,9 @@ class _WishlistScreenState extends ConsumerState<WishlistScreen> {
               softWrap: true,
               textAlign: TextAlign.center,
             ),
+            const SizedBox(
+              height: kBottomNavigationBarHeight + 20,
+            ),
           ],
         ),
       );
